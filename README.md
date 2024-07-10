@@ -38,3 +38,28 @@ En résumé, le code propre rend la collaboration avec d'autres développeurs pl
 ### Exemple d'Amélioration
 
 **Collaboration avec les clients** : En impliquant les clients régulièrement, nous pouvons mieux comprendre leurs besoins et nous adapter rapidement à leurs demandes. Cela nous permet de livrer un produit qui répond vraiment à leurs et nos attentes.
+
+
+## Partie 4 : Correction du Code de Gestion des Achats
+
+Le code original avait plusieurs problèmes :
+
+1. La classe `OrderProcessor` faisait trop de choses à la fois.
+2. Les dépendances étaient créées à l'intérieur du constructeur, ce qui rendait les tests unitaires difficiles.
+3. Utilisation de `RuntimeException` pour signaler une indisponibilité d'articles, ce qui n'est pas précis.
+
+Pour refactoriser le code, j'ai :
+
+- Divisé les responsabilités dans des méthodes séparées (`checkInventory`, `saveOrder`, `sendConfirmationEmail`, `updateInventory`, `applyLoyalCustomerDiscount`).
+- Utilisé l'injection de dépendances pour `Database`, `EmailService`, et `InventorySystem`, ce qui rend le code plus facile à tester.
+- Créé une exception spécifique `ItemNotAvailableException` pour signaler une indisponibilité d'article.
+
+J'ai ajouté les fonctionnalités suivantes :
+
+- Vérification de la disponibilité des articles.
+- Enregistrement de la commande.
+- Envoi d'un email de confirmation.
+- Mise à jour de l'inventaire.
+- Application d'une remise pour les clients fidèles.
+
+J'ai créé un fichier `OrderProcessor.java` qui contient le code refactorisé et correct.
